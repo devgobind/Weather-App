@@ -50,3 +50,9 @@ body{
 img {
     background: white;
 }
+
+.space {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}

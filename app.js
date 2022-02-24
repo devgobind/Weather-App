@@ -2,32 +2,78 @@ const location_input = document.querySelector(".location-text");
 const location_button = document.querySelector(".submit");
 const _weather = document.querySelector(".weather-container");
 const _image = document.getElementById("sky_img")
-let api;
+const weather_description = document.getElementsByTagName("h5")[0]
+const temperature = document.getElementsByTagName("p")[0]
+
 //Enter API Key
 const api_key = "ee1e7ca3c60d370a5f3c0300cffcb78f"
 function locationHandler() {
     if(navigator.geolocation)
-        loc = navigator.geolocation.getCurrentPosition(weather);
+        loc = navigator.geolocation.getCurrentPosition(location_weather);
     else
         console.log('Geolocation is not present');
 }
 
-function weather(position, city){
-    city = location_input.value;
-    _sky = "10d";
-    console.log(city);
-    api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api_key}`
-    fetch(api).then(response => response.json()).then(result => {
-        const {id} = result.weather[0];
-        console.log(id);
-        _image.src = `http://openweathermap.org/img/wn/${_sky}@2x.png`;
-        console.log(result.weather);
-    })
-    if(_weather.classList.contains("hide")){
-        _weather.classList.toggle("hide");
-    }
+function location_weather(position){
     const {latitude, longitude} = position.coords;
-    console.log(latitude, longitude, position.coords);
+    fetchCurrentLocationWeather(latitude, longitude);
+}
+
+function fetchCurrentLocationWeather(lat, lon){
+    api =`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${api_key}`;
+    fetchData(api);
+}
+
+function weather(description, temp){
+    desc = document.createTextNode(description);
+    weather_description.appendChild(desc);
+    _temp = document.createTextNode(`${Math.ceil(temp)}°C`);
+    temperature.appendChild(_temp)
+}
+
+function fetchCityData(city){
+    api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${api_key}`
+    fetchData(api);
+}
+
+function fetchData(api){
+    fetch(api).then(response => response.json()).then(result => {
+        console.log(result)
+        const {id, description} = result.weather[0];
+        const{temp} = result.main;
+        weather(description, temp);
+        sky_condition(id);
+        if(_weather.classList.contains("hide")){
+            _weather.classList.toggle("hide");
+        }
+
+    })
+}
+
+
+function sky_condition (id){
+    if(id == 800){
+        _sky = "01d"
+    }else if(id >= 200 && id <= 232){
+        _sky = "11d" 
+    }else if((id >= 300 && id <= 321)){
+        _sky = "09d"
+    }
+    else if((id >= 500 && id <= 531)){
+        _sky = "10d"
+    }
+    else if(id >= 600 && id <= 622){
+        _sky = "13d"
+    }else if(id >= 701 && id <= 781){
+        _sky = "50d"
+    }else if(id >= 801 && id <= 804){
+        _sky = "04d"
+    }
+    _image.src = `http://openweathermap.org/img/wn/${_sky}@2x.png`;
 }
 
    location_button.addEventListener("click", locationHandler);
+   location_input.addEventListener("keyup", event => {
+       if(event.keyCode ===13){
+           fetchCityData(location_input.value)
+       }})
