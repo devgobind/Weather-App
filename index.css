@@ -1,26 +1,52 @@
 body{
     background: linear-gradient(89deg, #56CCF2, #2F80ED);
+    font-family: 'Roboto Condensed', sans-serif;
 }
 .container{
     position: absolute;
     top: 50%;
     left: 50%;
     border-radius: 5px;
-    width: 40%;
+    width: 30%;
     transform: translate(-50%,-50%);
     padding: 30px 40px;
 }
 .container{
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    border: 2px solid black;
-    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .weather-container{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 .location-container{
-    margin-top: 100px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 50px;
+}
+
+.location-text {
+    width: 30em;
+    height: 50px;
+    border: 2px solid black;
+}
+
+.submit {
+    margin-top: 30px;
+}
+
+.hide {
+    display: none;
+}
+
+img {
+    background: white;
 }

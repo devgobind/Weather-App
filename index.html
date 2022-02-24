@@ -6,17 +6,19 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="index.css">
     <script defer src="app.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital@1&family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class = "container">
-        <span class = "location-container">
-            <input type="text" class="location-text">
-            <button class="submit">Get Weather Data</button>
-        </span>
-        <!-- <span class="weather-container">
-            <img alt="weather" src="https://iheartcraftythings.com/wp-content/uploads/2021/06/Cloud_5-1.jpg" width="100" height="100">
+        <div class = "location-container">
+            <input type="text" class="location-text" placeholder="Enter City Name">
+            <a href="#" class="btn btn-primary submit">Get Current Location</a>
+        </div>
+        <div class="weather-container hide">
+            <img alt="weather" src="#" width="100" height="100" id="sky_img">
             <p>Weather</p>
-        </span> -->
+        </div>
     </div>
 </body>
 </html>
