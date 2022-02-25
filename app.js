@@ -2,11 +2,10 @@ const location_input = document.querySelector(".location-text");
 const location_button = document.querySelector(".submit");
 const _weather = document.querySelector(".weather-container");
 const _image = document.getElementById("sky_img")
-const weather_description = document.getElementsByTagName("h5")[0]
-const temperature = document.getElementsByTagName("p")[0]
+const weather_details = document.querySelector("details-container")
 
 //Enter API Key
-const api_key = "ee1e7ca3c60d370a5f3c0300cffcb78f"
+const api_key = YOUR_API_KEY;
 function locationHandler() {
     if(navigator.geolocation)
         loc = navigator.geolocation.getCurrentPosition(location_weather);
@@ -25,10 +24,16 @@ function fetchCurrentLocationWeather(lat, lon){
 }
 
 function weather(description, temp){
+    const weather_description = document.createElement("p");
     desc = document.createTextNode(description);
     weather_description.appendChild(desc);
+    const temperature = document.createElement("h5");
     _temp = document.createTextNode(`${Math.ceil(temp)}°C`);
-    temperature.appendChild(_temp)
+    console.log(_temp)
+    temperature.append(_temp)
+    console.log(temperature)
+    weather_details.appendChild(temperature)
+    weather_details.appendChild(weather_description)
 }
 
 function fetchCityData(city){
