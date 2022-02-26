@@ -2,10 +2,10 @@ const location_input = document.querySelector(".location-text");
 const location_button = document.querySelector(".submit");
 const _weather = document.querySelector(".weather-container");
 const _image = document.getElementById("sky_img")
-const weather_details = document.querySelector("details-container")
-
+const weather_container = document.querySelector(".weather-container");
+const div = document.querySelector(".details-container");
 //Enter API Key
-const api_key = YOUR_API_KEY;
+const api_key = 'ee1e7ca3c60d370a5f3c0300cffcb78f';
 function locationHandler() {
     if(navigator.geolocation)
         loc = navigator.geolocation.getCurrentPosition(location_weather);
@@ -24,16 +24,16 @@ function fetchCurrentLocationWeather(lat, lon){
 }
 
 function weather(description, temp){
-    const weather_description = document.createElement("p");
-    desc = document.createTextNode(description);
-    weather_description.appendChild(desc);
+    let p = document.createElement("p");
+    desc = document.createTextNode(description.toUpperCase());
+    p.append(desc);
+    console.log(p);
+    div.appendChild(p);
     const temperature = document.createElement("h5");
-    _temp = document.createTextNode(`${Math.ceil(temp)}°C`);
-    console.log(_temp)
+    const _temp = document.createTextNode(`${Math.ceil(temp)}°C`);
     temperature.append(_temp)
-    console.log(temperature)
-    weather_details.appendChild(temperature)
-    weather_details.appendChild(weather_description)
+    div.append(temperature)
+    weather_container.append(div)
 }
 
 function fetchCityData(city){
@@ -46,6 +46,7 @@ function fetchData(api){
         console.log(result)
         const {id, description} = result.weather[0];
         const{temp} = result.main;
+        div.innerHTML = ''
         weather(description, temp);
         sky_condition(id);
         if(_weather.classList.contains("hide")){
