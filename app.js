@@ -5,7 +5,7 @@ const _image = document.getElementById("sky_img")
 const weather_container = document.querySelector(".weather-container");
 const div = document.querySelector(".details-container");
 //Enter API Key
-const api_key = 'ee1e7ca3c60d370a5f3c0300cffcb78f';
+const api_key = YOUR_API_KEY';
 function locationHandler() {
     if(navigator.geolocation)
         loc = navigator.geolocation.getCurrentPosition(location_weather);
